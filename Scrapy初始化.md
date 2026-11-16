@@ -1,27 +1,23 @@
+# Scrapy 项目初始化
 
+## 一、创建项目
+
+运行下面的命令，自动创建项目并生成标准目录结构：
 
 ```cmd
 scrapy startproject scrapy_first
 ```
 
-自动创建 Scrapy 项目并生成完整的标准目录结构
+## 二、生成爬虫
 
-
+运行下面的命令，生成一个爬虫模板文件：
 
 ```cmd
 scrapy genspider demo example.com
 ```
 
-这里会生成一个模板的爬虫文件
-
-
-
-- `demo`：既是爬虫文件名，也是爬虫的内部唯一标识，通过 `scrapy crawl demo` 启动该爬虫
-- `example.com`：初始化的允许爬取域名，自动写入 `allowed_domains`，用于限定爬取范围
-
-
-
-
+- `demo`：既是爬虫文件名，也是爬虫的内部唯一标识，通过 `scrapy crawl demo` 启动该爬虫。
+- `example.com`：初始化的允许爬取域名，自动写入 `allowed_domains`，用于限定爬取范围。
 
 ```txt
 scrapy_first/
@@ -38,20 +34,16 @@ scrapy_first/
 
 ```
 
+## 三、运行爬虫
+
 [打开 scrapy_first 项目文件夹（中文版）](scrapy_first)
-
-
 
 ```cmd
 cd scrapy_first
 ```
 
-终端路径必须进入外层 `scrapy_first` 目录（也就是包含 `scrapy.cfg` 文件的那一层
-
-
+终端路径必须进入外层 `scrapy_first` 目录（也就是包含 `scrapy.cfg` 文件的那一层）。
 
 ```cmd
 scrapy crawl demo
 ```
-
-

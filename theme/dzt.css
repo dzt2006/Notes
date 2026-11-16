@@ -207,38 +207,48 @@ blockquote {
 blockquote blockquote {
     padding-right: 0;
 }
+
+/* ====================== 极简墨风表格 · 精致重制版 ====================== */
 table {
-    padding: 0;
-    word-break: initial;
+    border-collapse: collapse;
+    width: 100%;
+    margin: 1.2em 0;
+    font-size: 0.95em;
+    word-break: break-word;
 }
-table tr {
-    border: 1px solid #dfe2e5;
-    margin: 0;
-    padding: 0;
-}
-table tr:nth-child(2n),
+
+/* 表头：无底色，加粗文字+粗底线，极简区分层级 */
 thead {
-    background-color: #f8f8f8;
+    background-color: transparent;
 }
+
 table th {
-    font-weight: bold;
-    border: 1px solid #dfe2e5;
-    border-bottom: 0;
-    margin: 0;
-    padding: 6px 13px;
+    font-weight: 600;
+    color: #333;
+    text-align: left;
+    padding: 12px 16px;
+    border-bottom: 2px solid #e0e0e0;
 }
+
+/* 数据行：仅底部极细分隔线，通透不压抑 */
 table td {
-    border: 1px solid #dfe2e5;
-    margin: 0;
-    padding: 6px 13px;
+    padding: 12px 16px;
+    border-bottom: 1px solid #f0f0f0;
+    color: #444;
 }
+
+/* 行悬停：极浅灰高亮，柔和过渡，无生硬跳变 */
+table tbody tr:hover {
+    background-color: #fafafa;
+    transition: background-color 0.2s ease;
+}
+
+/* 清理冗余边距规则 */
 table th:first-child,
-table td:first-child {
-    margin-top: 0;
-}
+table td:first-child,
 table th:last-child,
 table td:last-child {
-    margin-bottom: 0;
+    margin: 0;
 }
 
 .CodeMirror-lines {
@@ -285,8 +295,6 @@ code {
     line-height: 1.8 !important;
     font-variant-ligatures: none !important;
 }
-
-
 
 .md-fences .cm-comment {
     color: #2e7d32 !important; 
