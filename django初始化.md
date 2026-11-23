@@ -1,6 +1,6 @@
-# Django 项目初始化
+##### Django 项目初始化
 
-## 一、创建项目与应用
+##### 一、创建项目与应用
 
 ```cmd
 django-admin startproject firstdata 
@@ -35,7 +35,7 @@ firstdata/                # 项目根目录：整个项目文件夹
 
 [打开 firstdata 项目文件夹（中文版）](firstdata)
 
-## 二、注册应用并启动
+##### 二、注册应用并启动
 
 来到 `firstdata/settings.py`，把 `myapp` 加进 `INSTALLED_APPS`：
 
@@ -61,7 +61,7 @@ python manage.py migrate
 python manage.py runserver
 ```
 
-## 三、配置 MySQL
+##### 三、配置 MySQL
 
 先建好数据库：
 
@@ -92,7 +92,7 @@ DATABASES = {
 }
 ```
 
-## 四、把已有的表映射成模型
+##### 四、把已有的表映射成模型
 
 如果已经有现成的建表 SQL，例如：
 
@@ -119,7 +119,7 @@ python manage.py inspectdb [表名1 表名2 ...] | Out-File -Encoding utf8 输�
 
 中括号只是占位说明，不要照抄；不写表名就映射库里所有表。
 
-## 五、手写模型
+##### 五、手写模型
 
 如果还没有现成的表，就手动在 `myapp/models.py` 里定义模型：
 
@@ -151,7 +151,7 @@ class SampleTable(models.Model):
 | `verbose_name` | 后台和表单里显示的字段标签文字 |
 | `db_table` | 数据库里真实的表名 |
 
-## 六、数据库迁移
+##### 六、数据库迁移
 
 把 `models.py` 里 `Meta.managed` 的值改成 `True`，再执行下面的命令：
 
@@ -160,7 +160,7 @@ python manage.py makemigrations myapp
 python manage.py migrate myapp --fake
 ```
 
-## 七、写入数据
+##### 七、写入数据
 
 回到能看到 `manage.py` 的目录，新建与它同级的 `first_demo.py`，用来准备测试数据：
 
@@ -200,7 +200,7 @@ for item in sample_list:
 	item.save()
 ```
 
-## 八、查询
+##### 八、查询
 
 下面介绍常用的查询写法。
 
@@ -257,7 +257,7 @@ having sum(amount) > 2000;
 | __contains   | like '%x%' 包含 | __icontains | like '%x%' 忽略大小写 |
 | __startswith | like 'x%' 开头  | __isnull    | is null 为空          |
 
-## 九、修改
+##### 九、修改
 
 先看批量修改：
 
@@ -278,7 +278,7 @@ obj.quantity = 3
 obj.save()
 ```
 
-## 十、删除
+##### 十、删除
 
 最后是删除：
 
