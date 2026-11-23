@@ -77,7 +77,68 @@ import pymysql
 pymysql.install_as_MySQLdb()
 ```
 
-xxxxxxxxxx import pymysql​db_config = {    "host": "localhost",    "port": 3306,    "user": "root",    "password": "123456",    "database": "spider_db",    "charset": "utf8mb4"}​batch_size = 500​insert_sql = """            insert into books(书名, 作者)            values(%s, %s)            """​# 在进行入库的时候，字段一定要清理成相应的字段def books_rows(books):    return [        (            b["书名"],b["作者"]                )        for b in books    ]    def save_mysql(books):    conn = None    try:        conn = pymysql.connect(**db_config)        rows = books_rows(books)                conn.begin()                with conn.cursor() as cursor:            cursor.execute("delete from books")            for i in range(0, len(rows), batch_size):                cursor.executemany(insert_sql, rows[i:i + batch_size])                        conn.commit()                with conn.cursor() as cursor:            cursor.execute("select count(*) from books")            count = cursor.fetchone()[0]            return count             except Exception as e:        if conn:            conn.rollback()        print(f"入库失败，已回滚：{e}")        return None        finally:        if conn:            conn.close()            print("MySQL 连接已关闭")          python
+```python
+import pymysql
+
+db_config = {
+    "host": "localhost",
+    "port": 3306,
+    "user": "root",
+    "password": "123456",
+    "database": "spider_db",
+    "charset": "utf8mb4"
+}
+
+batch_size = 500
+
+insert_sql = """
+            insert into books(书名, 作者)
+            values(%s, %s)
+            """
+
+
+# 在进行入库的时候，字段一定要清理成相应的字段
+def books_rows(books):
+    return [
+        (
+            b["书名"],
+            b["作者"]
+        )
+        for b in books
+    ]
+
+
+def save_mysql(books):
+    conn = None
+    try:
+        conn = pymysql.connect(**db_config)
+        rows = books_rows(books)
+
+        conn.begin()
+
+        with conn.cursor() as cursor:
+            cursor.execute("delete from books")
+            for i in range(0, len(rows), batch_size):
+                cursor.executemany(insert_sql, rows[i:i + batch_size])
+
+        conn.commit()
+
+        with conn.cursor() as cursor:
+            cursor.execute("select count(*) from books")
+            count = cursor.fetchone()[0]
+            return count
+
+    except Exception as e:
+        if conn:
+            conn.rollback()
+        print(f"入库失败，已回滚：{e}")
+        return None
+
+    finally:
+        if conn:
+            conn.close()
+            print("MySQL 连接已关闭")
+```
 
 ```python
 DATABASES = {
